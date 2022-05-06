@@ -1,3 +1,46 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.head-sidebar.collapse {
+    @apply w-16;
+}
+.sidebar.collapse ~ .main {
+    @apply p-0;
+}
+
+.sidebar.collapse {
+    @apply w-16 relative;
+}
+
+.sidebar.collapse .side-head {
+    @apply hidden;
+}
+
+.sidebar.collapse .side-icon {
+    @apply text-2xl;
+}
+
+.sidebar.collapse .side-item-link {
+    @apply px-0 py-2 flex justify-center items-center;
+}
+
+.sidebar.collapse .side-item:hover .side-item-text {
+    @apply opacity-100 visible;
+}
+
+.sidebar.collapse .side-item:hover .side-child {
+    @apply opacity-100 visible;
+}
+
+.sidebar.collapse .side-item-text {
+    @apply absolute -right-52 bg-gray-800 w-52 py-3 opacity-0 invisible pl-4;
+}
+
+.sidebar.collapse .side-child {
+    @apply absolute -right-52 bg-gray-700 w-52 py-2 opacity-0 invisible;
+}
+
+.sidebar.collapse .side-child .side-child-item {
+    @apply bg-gray-700 pl-4 hover:bg-gray-800;
+}

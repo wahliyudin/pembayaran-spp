@@ -18,32 +18,31 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('assets/metismenu/metismenu.css') }}">
 </head>
 
 <body class="font-sans antialiased">
+    <x-jet-banner />
 
-    @include('layouts.inc.header')
+    <div class="min-h-screen bg-gray-100">
+        @livewire('navigation-menu')
 
-    <div class="flex min-h-screen pt-14">
-        @include('layouts.inc.sidebar')
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
 
-        <main class="pl-[13rem] main">
+        <!-- Page Content -->
+        <main>
             {{ $slot }}
         </main>
     </div>
 
-
     @stack('modals')
-    <script src="{{ asset('assets/metismenu/jquery.js') }}"></script>
-    <script src="{{ asset('assets/metismenu/metismenu.js') }}"></script>
 
-    <script src="{{ asset('assets/admin/sidebar.js') }}"></script>
-    <script>
-        $("#metismenu").metisMenu();
-    </script>
     @livewireScripts
 </body>
 
