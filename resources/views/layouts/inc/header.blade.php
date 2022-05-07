@@ -1,6 +1,6 @@
 <header class="flex justify-between h-14 bg-white shadow pr-6 fixed top-0 w-full z-50">
     <div class="flex">
-        <div class="flex justify-center items-center bg-gray-700 w-52 head-sidebar transition-all duration-300">
+        <div class="flex justify-center items-center bg-gray-700  w-[15rem] head-sidebar transition-all duration-300">
             <span class="text-white text-xl">SPP</span>
         </div>
 

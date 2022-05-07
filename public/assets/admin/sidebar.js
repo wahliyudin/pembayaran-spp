@@ -7,7 +7,7 @@ const sidebar = document.querySelector('.sidebar'),
 toggle.addEventListener('click', function () {
     sidebar.querySelector('.side').classList.toggle('metismenu');
 
-    sidebar.classList.toggle('collapse');
+    sidebar.classList.toggle('inactive');
     // sidebar.classList.toggle('fixed');
-    headSidebar.classList.toggle('collapse');
+    headSidebar.classList.toggle('inactive');
 })

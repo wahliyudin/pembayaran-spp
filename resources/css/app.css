@@ -2,45 +2,46 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-.head-sidebar.collapse {
+.head-sidebar.inactive {
     @apply w-16;
 }
-.sidebar.collapse ~ .main {
+
+.sidebar.inactive~.main {
     @apply p-0;
 }
 
-.sidebar.collapse {
-    @apply w-16 relative;
+.sidebar.inactive {
+    @apply w-[4.2rem] relative;
 }
 
-.sidebar.collapse .side-head {
+.sidebar.inactive .side-head {
     @apply hidden;
 }
 
-.sidebar.collapse .side-icon {
-    @apply text-2xl;
+.sidebar.inactive .side-icon {
+    @apply text-xl;
 }
 
-.sidebar.collapse .side-item-link {
+.sidebar.inactive .side-item-link {
     @apply px-0 py-2 flex justify-center items-center;
 }
 
-.sidebar.collapse .side-item:hover .side-item-text {
+.sidebar.inactive .side-item:hover .side-item-text {
     @apply opacity-100 visible;
 }
 
-.sidebar.collapse .side-item:hover .side-child {
+.sidebar.inactive .side-item:hover .side-child {
     @apply opacity-100 visible;
 }
 
-.sidebar.collapse .side-item-text {
-    @apply absolute -right-52 bg-gray-800 w-52 py-3 opacity-0 invisible pl-4;
+.sidebar.inactive .side-item-text {
+    @apply absolute -right-[15rem] bg-gray-800 w-[15rem] py-[12px] opacity-0 invisible pl-4;
 }
 
-.sidebar.collapse .side-child {
-    @apply absolute -right-52 bg-gray-700 w-52 py-2 opacity-0 invisible;
+.sidebar.inactive .side-child {
+    @apply absolute -right-[15rem] bg-gray-700 w-[15rem] py-2 opacity-0 invisible;
 }
 
-.sidebar.collapse .side-child .side-child-item {
+.sidebar.inactive .side-child .side-child-item {
     @apply bg-gray-700 pl-4 hover:bg-gray-800;
 }
