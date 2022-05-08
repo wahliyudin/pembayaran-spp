@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+    const STATUS_ACTIVE = true;
+    const STATUS_INACTIVE = false;
 
     protected $fillable = [
         'nim',

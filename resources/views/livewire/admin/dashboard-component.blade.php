@@ -38,7 +38,7 @@
 
                 <div class="flex flex-col space-y-1 p-2">
                     <span class="text-sm">Siswa Aktif</span>
-                    <span class="text-xl font-semibold">Rp. 100.000</span>
+                    <span class="text-xl font-semibold">{{ $student_active }}</span>
                 </div>
             </div>
         </div>

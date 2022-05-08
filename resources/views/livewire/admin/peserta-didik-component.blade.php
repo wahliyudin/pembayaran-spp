@@ -23,25 +23,25 @@
                         <table class="min-w-full">
                             <thead class="bg-white border-b">
                                 <tr>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    <th scope="col" class="text-gray-900 px-6 py-4 text-left">
                                         No
                                     </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    <th scope="col" class="text-gray-900 px-6 py-4 text-left">
                                         NIM
                                     </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    <th scope="col" class="text-gray-900 px-6 py-4 text-left">
                                         Nama
                                     </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    <th scope="col" class="text-gray-900 px-6 py-4 text-left">
                                         Kelas
                                     </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    <th scope="col" class="text-gray-900 px-6 py-4 text-left">
                                         Jurusan
                                     </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    <th scope="col" class="text-gray-900 px-6 py-4 text-left">
                                         Status
                                     </th>
-                                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                    <th scope="col" class="text-gray-900 px-6 py-4 text-left">
                                         Aksi
                                     </th>
                                 </tr>
