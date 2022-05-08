@@ -20,7 +20,7 @@ class StudentFactory extends Factory
             'name' => $this->faker->name(),
             'data_class_id' => $this->faker->randomElement(DataClass::pluck('id')->toArray()),
             'major_id' => $this->faker->randomElement(Major::pluck('id')->toArray()),
-            'status' => $this->faker->boolean()
+            'status' => $this->faker->randomElement([true, false])
         ];
     }
 }

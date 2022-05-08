@@ -16,4 +16,14 @@ class Student extends Model
         'major_id',
         'status'
     ];
+
+    public function dataClass()
+    {
+        return $this->belongsTo(DataClass::class);
+    }
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
 }
