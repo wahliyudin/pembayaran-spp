@@ -17,7 +17,7 @@ class MonthSeeder extends Seeder
         $months = ['Januari', 'Pebruari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
         for ($i = 0; $i < count($months); $i++) {
-            Month::create(['nama' => $months[$i]]);
+            Month::create(['name' => $months[$i]]);
         }
     }
 }

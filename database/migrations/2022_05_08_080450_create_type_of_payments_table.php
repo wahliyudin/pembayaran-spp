@@ -22,7 +22,7 @@ class CreateTypeOfPaymentsTable extends Migration
 
             $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
             $table->foreign('school_year_id')->references('id')->on('school_years')->onDelete('cascade');
-            $table->$table->timestamps();
+            $table->timestamps();
         });
     }
 
