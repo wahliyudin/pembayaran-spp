@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\DataClass;
+use App\Models\Major;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,5 +18,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(SchoolProfileSeeder::class);
+        $this->call(MonthSeeder::class);
+        DataClass::factory(5)->create();
+        Major::factory(10)->create();
+        Student::factory(100)->create();
+        $this->call(PaymentSeeder::class);
     }
 }
