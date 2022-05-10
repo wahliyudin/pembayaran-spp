@@ -15,4 +15,14 @@ class TypeOfPayment extends Model
         'type',
         'school_year_id'
     ];
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
+
+    public function schoolYear()
+    {
+        return $this->belongsTo(SchoolYear::class);
+    }
 }

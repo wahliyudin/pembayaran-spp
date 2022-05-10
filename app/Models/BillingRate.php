@@ -11,6 +11,17 @@ class BillingRate extends Model
 
     protected $fillable = [
         'student_id',
-        'billing'
+        'billing',
+        'type_of_payment_id'
     ];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function typeOfPayment()
+    {
+        return $this->belongsTo(TypeOfPayment::class);
+    }
 }
