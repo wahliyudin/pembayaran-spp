@@ -28,4 +28,14 @@ class Student extends Model
     {
         return $this->belongsTo(Major::class);
     }
+
+    public function frees()
+    {
+        return $this->hasMany(Free::class);
+    }
+
+    public function monthly()
+    {
+        return $this->hasOne(Monthly::class);
+    }
 }

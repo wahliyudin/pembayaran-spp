@@ -12,7 +12,8 @@ class SchoolYear extends Model
     const STATUS_NOT_ACTIVE = false;
 
     protected $fillable = [
-        'school_year',
+        'year_start',
+        'year_end',
         'status'
     ];
 }

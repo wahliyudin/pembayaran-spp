@@ -47,10 +47,10 @@
                                             {{ $item->type }}
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $item->schoolYear->school_year }}
+                                            {{ $item->schoolYear->year_start . ' / ' . $item->schoolYear->year_end }}
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <a href="{{ route('tarif-tagihan', $item->id) }}"
+                                            <a href="{{ route($item->type == 'bulanan' ? 'tarif-pembayaran' : 'tarif-tagihan', Crypt::encrypt($item->id)) }}"
                                                 class="text-sm text-white bg-blue-600 px-2 py-1 rounded">Atur Tarif
                                                 Pembayaran</a>
                                         </td>
@@ -100,7 +100,8 @@
                     <select wire:model='school_year_id' id="" class="rounded py-2 px-2">
                         <option selected>-- pilih --</option>
                         @foreach ($school_years as $school_year)
-                            <option value="{{ $school_year->id }}">{{ $school_year->school_year }}</option>
+                            <option value="{{ $school_year->id }}">
+                                {{ $school_year->year_start . ' / ' . $school_year->year_end }}</option>
                         @endforeach
                     </select>
                     @error('school_year_id')
@@ -131,7 +132,7 @@
         </x-slot>
 
         <x-slot name="footer">
-            @if (isset($type_of_payment))
+            @if (isset($typeOfPayment))
                 <button wire:click="update" class="text-white bg-blue-500 px-4 py-2 rounded">Update</button>
             @else
                 <button wire:click="store" class="text-white bg-blue-500 px-4 py-2 rounded">Simpan</button>

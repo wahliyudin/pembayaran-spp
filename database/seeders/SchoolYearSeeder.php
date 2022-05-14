@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\SchoolYear;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class SchoolYearSeeder extends Seeder
@@ -15,7 +16,8 @@ class SchoolYearSeeder extends Seeder
     public function run()
     {
         SchoolYear::create([
-            'school_year' => '2021/2022',
+            'year_start' => now()->format('Y'),
+            'year_end' => now()->addYear()->format('Y'),
             'status' => SchoolYear::STATUS_ACTIVE
         ]);
     }

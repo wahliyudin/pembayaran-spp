@@ -6,6 +6,19 @@
                     <i class="fa-solid fa-plus"></i>
                     Tambah Data
                 </button>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <input datepicker datepicker-format="yyyy" datepicker-autohide type="text"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Select date">
+                </div>
             </div>
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -33,7 +46,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                             {{ $loop->iteration }}</td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $item->school_year }}
+                                            {{ $item->year_start . ' / ' . $item->year_end }}
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{ $item->status ? 'Aktif' : 'Tidak Aktif' }}
@@ -73,16 +86,24 @@
         </x-slot>
 
         <x-slot name="content">
-            <div class="grid grid-cols-1 gap-6">
+            <div class="grid grid-cols-2 gap-6">
                 <div class="flex flex-col space-y-1">
                     <label for="" class="font-semibold">Tahun Pelajaran</label>
-                    <input type="text" wire:model='school_year' id="" class="rounded py-2 px-2"
+                    <input type="number" wire:model='year_start' id="" class="rounded py-2 px-2"
                         placeholder="Tahun Pelajaran">
-                    @error('school_year')
+                    @error('year_start')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="flex flex-col space-y-1">
+                    <input type="number" wire:model='year_end' readonly id="" class="rounded py-2 px-2 bg-gray-100 mt-8"
+                        placeholder="Tahun Pelajaran">
+                    @error('year_end')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="flex flex-col space-y-1 col-span-2">
                     <label for="" class="font-semibold">Status</label>
                     <select wire:model='status' id="" class="rounded py-2 px-2">
                         <option selected>-- pilih --</option>
@@ -108,4 +129,11 @@
             </x-jet-danger-button>
         </x-slot>
     </x-jet-dialog-modal>
+
+    @push('css')
+        <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.5/dist/flowbite.min.css" />
+    @endpush
+    @push('js')
+        <script src="https://unpkg.com/flowbite@1.4.5/dist/datepicker.js"></script>
+    @endpush
 </div>

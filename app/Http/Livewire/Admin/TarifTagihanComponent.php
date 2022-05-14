@@ -2,13 +2,17 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\BillingRate;
 use App\Models\DataClass;
+use App\Models\Free;
+use App\Models\FreePayment;
 use App\Models\Major;
 use App\Models\Student;
 use App\Models\TypeOfPayment;
+use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -28,19 +32,28 @@ class TarifTagihanComponent extends Component
     public $type_of_payment_id;
     public $data_class_id;
     public $students;
+
     public $student_id;
-    public $billing;
+    public $free_bill;
+
+    public $type;
 
     public $modal;
 
-    public $billing_rate;
+    public $free;
 
     protected $listeners = ['destroy'];
 
     public function mount($id)
     {
-        $this->type_of_payment = TypeOfPayment::find($id)->first();
+        try {
+            $decrypted = Crypt::decrypt($id);
+        } catch (DecryptException $e) {
+            $this->alert('error', $e->getMessage());
+        }
+        $this->type_of_payment = TypeOfPayment::findOrFail($decrypted);
         $this->type_of_payment_id = $this->type_of_payment->id;
+        $this->type = $this->type_of_payment->type;
     }
 
     public function render()
@@ -48,11 +61,11 @@ class TarifTagihanComponent extends Component
         return view('livewire.admin.tarif-tagihan-component', [
             'data_classes' => DataClass::get(),
             'majors' => Major::get(),
-            'billing_rates' => DB::table('billing_rates')->join('students', 'students.id', '=', 'billing_rates.student_id')->join('data_classes', 'data_classes.id', '=', 'students.data_class_id')->join('majors', 'majors.id', '=', 'students.major_id')->when(Arr::get($this->filter, 'data_class_id'), function (Builder $query) {
+            'frees' => DB::table('frees')->join('students', 'students.id', '=', 'frees.student_id')->join('data_classes', 'data_classes.id', '=', 'students.data_class_id')->join('majors', 'majors.id', '=', 'students.major_id')->when(Arr::get($this->filter, 'data_class_id'), function (Builder $query) {
                 $query->where('data_classes.id', Arr::get($this->filter, 'data_class_id'))->first();
             })->when(Arr::get($this->filter, 'major_id'), function (Builder $query) {
                 $query->where('majors.id', Arr::get($this->filter, 'major_id'))->first();
-            })->select('students.nim as student_nim', 'students.name as student_name', 'data_classes.name as data_class_name', 'majors.name as major_name', 'billing_rates.*')->paginate(5)
+            })->select('students.nim as student_nim', 'students.name as student_name', 'data_classes.name as data_class_name', 'majors.name as major_name', 'frees.*')->paginate(5)
         ]);
     }
 
@@ -60,8 +73,7 @@ class TarifTagihanComponent extends Component
     {
         $this->validateOnly($field, [
             'student_id' => 'required',
-            'billing' => 'required',
-            'type_of_payment' => 'required'
+            'free_bill' => 'required'
         ]);
     }
 
@@ -82,7 +94,7 @@ class TarifTagihanComponent extends Component
 
     public function create()
     {
-        $this->resetExcept(['type_of_payment', 'type_of_payment_id', 'billingRate']);
+        $this->resetExcept(['type_of_payment', 'type_of_payment_id', 'type']);
         $this->showModal();
     }
 
@@ -90,11 +102,14 @@ class TarifTagihanComponent extends Component
     {
         $validatedData = $this->validate([
             'student_id' => 'required',
-            'billing' => 'required',
-            'type_of_payment_id' => 'required'
+            'free_bill' => 'required'
         ]);
         try {
-            BillingRate::create($validatedData);
+            Free::create([
+                'student_id' => Arr::get($validatedData, 'student_id'),
+                'type_of_payment_id' => $this->type_of_payment_id,
+                'free_bill' => Arr::get($validatedData, 'free_bill')
+            ]);
             $this->closeModal();
             $this->alert('success', 'Data berhasil disimpan');
         } catch (\Throwable $th) {
@@ -102,23 +117,23 @@ class TarifTagihanComponent extends Component
         }
     }
 
-    public function edit(BillingRate $billingRate)
+    public function edit(Free $free)
     {
-        $this->billingRate = $billingRate;
-        $this->data_class_id = $billingRate->student->data_class_id;
+        $this->free = $free;
+        $this->data_class_id = $free->student->data_class_id;
         $this->students = Student::query()->where('data_class_id', $this->data_class_id)->get();
-        $this->student_id = $billingRate->student_id;
-        $this->billing = $billingRate->billing;
-        $this->type_of_payment_id = $billingRate->type_of_payment_id;
+        $this->student_id = $free->student_id;
+        $this->free_bill = $free->free_bill;
+        $this->type_of_payment_id = $free->type_of_payment_id;
         $this->showModal();
     }
 
     public function update()
     {
         try {
-            $this->billingRate->update([
+            $this->free->update([
                 'student_id' => $this->student_id,
-                'billing' => $this->billing,
+                'free_bill' => $this->free_bill,
                 'type_of_payment_id' => $this->type_of_payment_id
             ]);
             $this->closeModal();
@@ -128,9 +143,9 @@ class TarifTagihanComponent extends Component
         }
     }
 
-    public function delete(BillingRate $billingRate)
+    public function delete(Free $free)
     {
-        $this->billingRate = $billingRate;
+        $this->free = $free;
         $this->confirm('Apakah anda yakin?', [
             'text' => 'Data yang dihapus tidak akan di kembalikan lagi',
             'showConfirmButton' => true,
@@ -145,11 +160,21 @@ class TarifTagihanComponent extends Component
     public function destroy()
     {
         try {
-            $this->billingRate->delete();
-            $this->resetExcept(['type_of_payment', 'type_of_payment_id', 'billingRate']);
+            $this->free->delete();
+            $this->resetExcept(['type_of_payment', 'type_of_payment_id', 'free']);
             $this->alert('success', 'Data berhasil dihapus');
         } catch (\Throwable $th) {
             $this->alert('error', $th->getMessage());
+        }
+    }
+
+    public function autoNumbering()
+    {
+        $thnBulan = Carbon::now()->year . Carbon::now()->month;
+        if (FreePayment::count() === 0) {
+            $this->nota = 'NT' . $thnBulan . '10000001';
+        } else {
+            $this->nota = 'NT' . $thnBulan . (int) substr(FreePayment::get()->last()->nota, -8) + 1;
         }
     }
 }

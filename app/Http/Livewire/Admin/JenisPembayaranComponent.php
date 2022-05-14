@@ -150,6 +150,7 @@ class JenisPembayaranComponent extends Component
 
     public function getSchoolYear($school_year_id)
     {
-        return SchoolYear::find($school_year_id)->first()->school_year;
+        $school_year = SchoolYear::find($school_year_id)->first();
+        return $school_year->year_start . ' / ' . $school_year->year_end;
     }
 }

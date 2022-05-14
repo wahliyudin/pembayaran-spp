@@ -16,7 +16,8 @@ class TahunPelajaranComponent extends Component
 
     public $school_year_model;
 
-    public $school_year;
+    public $year_start;
+    public $year_end;
     public $status;
 
     protected $listeners = ['destroy'];
@@ -31,9 +32,15 @@ class TahunPelajaranComponent extends Component
     public function updated($field)
     {
         $this->validateOnly($field, [
-            'school_year' => 'required',
+            'year_start' => 'required',
+            'year_end' => 'required',
             'status' => 'required|boolean'
         ]);
+    }
+
+    public function updatedYearStart()
+    {
+        $this->year_end = $this->year_start + 1;
     }
 
     public function showModal()
@@ -55,7 +62,8 @@ class TahunPelajaranComponent extends Component
     public function edit(SchoolYear $school_year_model)
     {
         $this->school_year_model = $school_year_model;
-        $this->school_year = $school_year_model->school_year;
+        $this->year_start = $school_year_model->year_start;
+        $this->year_end = $school_year_model->year_end;
         $this->status = $school_year_model->status;
         $this->showModal();
     }
@@ -64,7 +72,8 @@ class TahunPelajaranComponent extends Component
     {
         try {
             $this->school_year_model->update([
-                'school_year' => $this->school_year,
+                'year_start' => $this->year_start,
+                'year_end' => $this->year_end,
                 'status' => $this->status
             ]);
             $this->closeModal();
@@ -77,7 +86,8 @@ class TahunPelajaranComponent extends Component
     public function store()
     {
         $validatedData = $this->validate([
-            'school_year' => 'required',
+            'year_start' => 'required',
+            'year_end' => 'required',
             'status' => 'required|boolean'
         ]);
         try {
