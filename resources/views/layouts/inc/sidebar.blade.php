@@ -120,7 +120,7 @@
             </a>
         </li>
         <li class="mm-active relative group side-item">
-            <a href="{{ route('dashboard') }}" aria-expanded="true"
+            <a href="{{ route('backup.database') }}" aria-expanded="true"
                 class="text-white group-hover:bg-gray-800 px-4 flex items-center space-x-4 py-2 side-item-link">
                 <i class="fa-solid fa-database side-icon"></i>
                 <span class="side-item-text text-sm">Backup Database</span>

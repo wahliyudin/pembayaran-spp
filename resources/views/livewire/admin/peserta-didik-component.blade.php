@@ -2,7 +2,7 @@
     <div class="bg-white shadow px-4 py-4 w-full border-t-2 border-gray-700 rounded">
         <div class="flex flex-col">
             <div class="flex justify-between items-center">
-                <div class="flex space-x-1 items-center">
+                <div class="flex items-center space-x-1">
                     <button class="bg-red-700 text-white px-4 py-2 rounded text-sm">
                         <i class="fa-solid fa-print"></i>
                         Cetak Kartu
@@ -11,11 +11,21 @@
                         <i class="fa-solid fa-plus"></i>
                         Tambah Data
                     </button>
-                    <button class="bg-blue-700 text-white px-4 py-2 rounded text-sm">
+                </div>
+                <form action="{{ route('siswa.import') }}" method="post" class="flex space-x-1 items-start"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="flex flex-col space-y-1">
+                        <input type="file" name="file" id="" class="rounded py-2 px-2 border text-sm">
+                        @error('file')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded text-sm">
                         <i class="fa-solid fa-upload"></i>
                         Upload Siswa
                     </button>
-                </div>
+                </form>
             </div>
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -27,7 +37,7 @@
                                         No
                                     </th>
                                     <th scope="col" class="text-gray-900 px-6 py-4 text-left">
-                                        NIM
+                                        NIS
                                     </th>
                                     <th scope="col" class="text-gray-900 px-6 py-4 text-left">
                                         Nama
@@ -103,8 +113,8 @@
         <x-slot name="content">
             <div class="grid grid-cols-2 gap-6">
                 <div class="flex flex-col space-y-1">
-                    <label for="" class="font-semibold">NIM</label>
-                    <input type="number" wire:model='nim' id="" class="rounded py-2 px-2" placeholder="NIM">
+                    <label for="" class="font-semibold">NIS</label>
+                    <input type="number" wire:model='nim' id="" class="rounded py-2 px-2" placeholder="NIS">
                     @error('nim')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror

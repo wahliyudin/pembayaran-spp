@@ -116,9 +116,6 @@
                 <td style="width: 50px;">Nama</td>
                 <td>:</td>
                 <td>{{ $student->name }}</td>
-                <td style="width: 120px;">Tahun Pelajaran</td>
-                <td>:</td>
-                <td>2022 / 2023</td>
             </tr>
             <tr>
                 <td style="width: 50px;">Kelas</td>

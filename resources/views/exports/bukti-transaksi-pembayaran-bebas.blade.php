@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Wahliyudins</title>
+    <title>Bukti Pembayaran</title>
 </head>
 
 <style type="text/css">
@@ -100,36 +100,27 @@
 
     <div class="container">
         <div class="topright">Bukti Pembayaran</div>
-        <div class="topright2">Lunas</div>
+        {{-- <div class="topright2">Lunas</div> --}}
     </div>
-    <p class="name-school">SMA TIRTAJAYA</p>
-    <p class="alamat">JL. BABAKAN<br>sagdkasdh</p>
+    <p class="name-school">{{ $informasi->name }}</p>
+    <p class="alamat">{{ $informasi->address }}<br>{{ $informasi->phone }}</p>
     <hr>
     <table style="padding-top: -5px; padding-bottom: 5px">
         <tbody>
             <tr>
                 <td style="width: 50px;">NIM</td>
                 <td style="width: 10px;">:</td>
-                <td>25256685</td>
-                <td style="width: 100px;">Tanggal Bayar</td>
-                <td style="width: 10px;">:</td>
-                <td>1 Mei 2002</td>
+                <td>{{ $student->nim }}</td>
             </tr>
             <tr>
                 <td style="width: 50px;">Nama</td>
                 <td style="width: 10px;">:</td>
-                <td>Wahliyudin</td>
-                <td style="width: 100px;">No. Ref</td>
-                <td style="width: 10px;">:</td>
-                <td>354654654654</td>
+                <td>{{ $student->name }}</td>
             </tr>
             <tr>
                 <td style="width: 50px;">Kelas</td>
                 <td style="width: 10px;">:</td>
-                <td>X</td>
-                <td style="width: 100px;">Tahun Pelajaran</td>
-                <td style="width: 10px;">:</td>
-                <td>2022 / 2023</td>
+                <td>{{ $student->dataClass->name }}</td>
             </tr>
         </tbody>
     </table>
@@ -139,33 +130,48 @@
     <table style="border-style: solid;">
         <tr>
             <th style="border-top: 1px solid; border-bottom: 1px solid;">No.</th>
+            <th style="border-top: 1px solid; border-bottom: 1px solid;">Tgl.Pembayaran</th>
+            <th style="border-top: 1px solid; border-bottom: 1px solid;">No.Pembayaran</th>
             <th style="border-top: 1px solid; border-bottom: 1px solid;">Pembayaran</th>
             <th style="border-top: 1px solid; border-bottom: 1px solid;">Keterangan</th>
             <th style="border-top: 1px solid; border-bottom: 1px solid;">Total Tagihan</th>
             <th style="border-top: 1px solid; border-bottom: 1px solid;">Jumlah Pembayaran</th>
         </tr>
-        <tr>
-            <td style="border-bottom: 1px solid;padding-top: 15px; padding-bottom: 15px;">1</td>
-            <td style="border-bottom: 1px solid;">INFAQ</td>
-            <td style="border-bottom: 1px solid;">lsfhaslfhasf</td>
-            <td style="border-bottom: 1px solid">Rp. 50.000</td>
-            <td style="border-bottom: 1px solid;">
-                Rp. 50.000</td>
-        </tr>
+        {{ $total = 0 }}
+        {{ $sisa = 0 }}
+        @foreach ($frees as $free)
+            <tr>
+                <td style="border-bottom: 1px solid;padding-top: 15px; padding-bottom: 15px;">
+                    {{ $loop->iteration }}
+                </td>
+                <td style="border-bottom: 1px solid;">
+                    {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $free->created_at, 'Asia/Jakarta')->subDays(1)->format('d M Y') }}
+                </td>
+                <td style="border-bottom: 1px solid;">{{ $free->payment_number }}</td>
+                <td style="border-bottom: 1px solid;">{{ $free->type_payment }}</td>
+                <td style="border-bottom: 1px solid;">{{ $free->description }}</td>
+                <td style="border-bottom: 1px solid">
+                    Rp.
+                    {{ number_format($free->free_bill != 0 ? ($free->total_payment != 0 ? $free->total_payment + $free->free_bill : $free->free_bill) : $free->total_payment, 0, ',', '.') }}
+                </td>
+                <td style="border-bottom: 1px solid;">Rp. {{ number_format($free->billing, 0, ',', '.') }}</td>
+            </tr>
+            {{ $total += $free->billing }}
+            {{ $sisa += $free->free_bill }}
+        @endforeach
 
         <tr>
-            <td colspan="2" style="text-align: center;padding-top: 5px; padding-bottom: 5px;">&nbsp;</td>
-            <td>&nbsp;</td>
+            <td colspan="5" style="text-align: center;padding-top: 5px; padding-bottom: 5px;">&nbsp;</td>
             <td style="background-color: #dedede; font-weight:bold; border-bottom: 1px solid;">Total Pembayaran</td>
-            <td style="background-color: #dedede; font-weight:bold;border-bottom: 1px solid;">
-                Rp. 100.000</td>
+            <td style="background-color: #dedede; font-weight:bold;border-bottom: 1px solid;">Rp.
+                {{ number_format($total, 0, ',', '.') }}</td>
         </tr>
         <tr>
-            <td colspan="3"></td>
-            <td style="background-color: #ECECEC; font-weight:bold; padding-top: 5px; padding-bottom: 5px;">Sisa Tagihan
+            <td colspan="5">&nbsp;</td>
+            <td style="background-color: #ECECEC; font-weight:bold; padding-top: 5px; padding-bottom: 5px;">
+                Sisa Tagihan
             </td>
-            <td style="background-color: #ECECEC; font-weight:bold;">
-                Rp. 20.000</td>
+            <td style="background-color: #ECECEC; font-weight:bold;">Rp. {{ number_format($sisa, 0, ',', '.') }}</td>
         </tr>
     </table>
     <br>

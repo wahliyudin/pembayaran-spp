@@ -21,13 +21,13 @@ class ProfileSekolahComponent extends Component
     public function mount()
     {
         $schoolProfile = SchoolProfile::first();
-        $this->level = $schoolProfile->level;
-        $this->name = $schoolProfile->name;
-        $this->address = $schoolProfile->address;
-        $this->districts = $schoolProfile->districts;
-        $this->city = $schoolProfile->city;
-        $this->phone = $schoolProfile->phone;
-        $this->logo = $schoolProfile->logo;
+        $this->level = $schoolProfile->level ?? '';
+        $this->name = $schoolProfile->name ?? '';
+        $this->address = $schoolProfile->address ?? '';
+        $this->districts = $schoolProfile->districts ?? '';
+        $this->city = $schoolProfile->city ?? '';
+        $this->phone = $schoolProfile->phone ?? '';
+        $this->logo = $schoolProfile->logo ?? '';
     }
 
     public function render()

@@ -313,7 +313,8 @@
                         @if (count($student->frees) != 0)
                             <div class="flex flex-col">
                                 <div class="flex justify-end">
-                                    <a href="{{ route('exports.bebas', $student->id) }}" target="_blank"
+                                    <a href="{{ route('exports.bebas', Crypt::encrypt($student->id)) }}"
+                                        target="_blank"
                                         class="bg-blue-500 text-white text-sm px-4 py-1 rounded flex items-center font-semibold"><i
                                             class='bx bxs-printer text-xl mr-2'></i> Cetak Bukti Pembayaran</a>
                                 </div>

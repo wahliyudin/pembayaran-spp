@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\ExportController;
+use App\Http\Controllers\Admin\ImportController;
+use App\Http\Controllers\Admin\ZipController;
+use App\Http\Livewire\Admin\BackupDatabaseComponent;
 use App\Http\Livewire\Admin\BulanComponent;
 use App\Http\Livewire\Admin\DashboardComponent;
 use App\Http\Livewire\Admin\JenisPembayaranComponent;
@@ -35,7 +38,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('tarif-pembayaran/{id}', TarifPembayaranComponent::class)->name('tarif-pembayaran');
     Route::get('tarif-pembayaran-siswa/{id}', TarifPembayaranSiswaComponent::class)->name('tarif-pembayaran-siswa');
     Route::get('transaksi-siswa', TransaksiSiwaComponent::class)->name('transaksi-siswa');
+    Route::get('backup-database', BackupDatabaseComponent::class)->name('backup.database');
 
     Route::get('exports-bukti-transaksi-pembayaran-bulanan/{id}', [ExportController::class, 'exportBuktiTransaksiBulanan'])->name('exports.bulanan');
     Route::get('exports-bukti-transaksi-pembayaran-bebas/{id}', [ExportController::class, 'exportBuktiTransaksiBebas'])->name('exports.bebas');
+    Route::post('siswa/import', [ImportController::class, 'siswaImport'])->name('siswa.import');
+
+    Route::get('download-zip', [ZipController::class, 'downloadZip'])->name('backup');
 });

@@ -15,12 +15,12 @@ class SchoolProfileSeeder extends Seeder
     public function run()
     {
         SchoolProfile::create([
-            'name' => 'Consequuntur veritat',
+            'name' => 'SMK NAHDLATUL ULAMA ATTARBIYYAH',
             'level' => 'SMK/SMA/MA',
-            'address' => 'Esse voluptatem cil',
-            'districts' => 'Et atque in perferen',
-            'city' => 'Aliquid sed ex dolor',
-            'phone' => '054454545',
+            'address' => 'Jl. Desa Ciwulan Kec. Telagasari - Karawang 41381',
+            'districts' => 'Telagasari',
+            'city' => 'Karawang',
+            'phone' => '085693296980',
             'logo' => 'assets/images/user-default.png'
         ]);
     }

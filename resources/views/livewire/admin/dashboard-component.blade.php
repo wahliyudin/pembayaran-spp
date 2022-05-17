@@ -11,7 +11,7 @@
                     <span class="text-xl font-semibold">Rp. 100.000</span>
                 </div>
             </div>
-            <div class="flex bg-white shadow col-span-1">
+            {{-- <div class="flex bg-white shadow col-span-1">
                 <div class="bg-red-600 p-4">
                     <i class='bx bx-export text-5xl text-white'></i>
                 </div>
@@ -20,7 +20,7 @@
                     <span class="text-sm">Pengeluaran Hari Ini</span>
                     <span class="text-xl font-semibold">Rp. 100.000</span>
                 </div>
-            </div>
+            </div> --}}
             <div class="flex bg-white shadow col-span-1">
                 <div class="bg-green-600 p-4">
                     <i class='bx bxs-credit-card text-5xl text-white'></i>

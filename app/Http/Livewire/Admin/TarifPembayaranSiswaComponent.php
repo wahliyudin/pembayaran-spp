@@ -24,11 +24,13 @@ class TarifPembayaranSiswaComponent extends Component
     public $bill_all;
 
     public $type_of_payment;
+    public $tarif_payment_id;
 
     public function mount($id)
     {
         try {
             $decrypted = Crypt::decrypt($id);
+            $this->tarif_payment_id = $decrypted;
         } catch (DecryptException $e) {
             $this->alert('error', $e->getMessage());
         }
@@ -61,19 +63,27 @@ class TarifPembayaranSiswaComponent extends Component
     public function create()
     {
         try {
-            $monthly = Monthly::create([
-                'student_id' => $this->student_id,
-                'type_of_payment_id' => $this->type_of_payment->id
-            ]);
-            foreach ($this->monthly as $key => $value) {
-                MonthlyPayment::create([
-                    'user_id' => auth()->user()->id,
-                    'month_id' => $key,
-                    'monthly_id' => $monthly->id,
-                    'month_bill' => $value
+            if (Monthly::where('student_id', $this->student_id)->where(
+                'type_of_payment_id',
+                $this->type_of_payment->id
+            )->first()) {
+                $this->alert('warning', 'Data Sudah Ada');
+            } else {
+                $monthly = Monthly::create([
+                    'student_id' => $this->student_id,
+                    'type_of_payment_id' => $this->type_of_payment->id
                 ]);
+                foreach ($this->monthly as $key => $value) {
+                    MonthlyPayment::create([
+                        'user_id' => auth()->user()->id,
+                        'month_id' => $key,
+                        'monthly_id' => $monthly->id,
+                        'month_bill' => $value
+                    ]);
+                }
+                $this->alert('success', 'Data Berhasil disimpan');
+                return redirect()->route('tarif-pembayaran', Crypt::encrypt($this->tarif_payment_id));
             }
-            $this->alert('success', 'Data Berhasil disimpan');
         } catch (\Throwable $th) {
             $this->alert('error', $th->getMessage());
         }
@@ -87,19 +97,27 @@ class TarifPembayaranSiswaComponent extends Component
             'bill_all' => 'required'
         ]);
         try {
-            $monthly = Monthly::create([
-                'student_id' => $this->student_id,
-                'type_of_payment_id' => $this->type_of_payment->id
-            ]);
-            foreach (Month::get() as $month) {
-                MonthlyPayment::create([
-                    'user_id' => auth()->user()->id,
-                    'month_id' => $month->id,
-                    'monthly_id' => $monthly->id,
-                    'month_bill' => $this->bill_all
+            if (Monthly::where('student_id', $this->student_id)->where(
+                'type_of_payment_id',
+                $this->type_of_payment->id
+            )->first()) {
+                $this->alert('warning', 'Data Sudah Ada');
+            } else {
+                $monthly = Monthly::create([
+                    'student_id' => $this->student_id,
+                    'type_of_payment_id' => $this->type_of_payment->id
                 ]);
+                foreach (Month::get() as $month) {
+                    MonthlyPayment::create([
+                        'user_id' => auth()->user()->id,
+                        'month_id' => $month->id,
+                        'monthly_id' => $monthly->id,
+                        'month_bill' => $this->bill_all
+                    ]);
+                }
+                $this->alert('success', 'Data Berhasil disimpan');
+                return redirect()->route('tarif-pembayaran', Crypt::encrypt($this->tarif_payment_id));
             }
-            $this->alert('success', 'Data Berhasil disimpan');
         } catch (\Throwable $th) {
             $this->alert('error', $th->getMessage());
         }
