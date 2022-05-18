@@ -6,19 +6,22 @@ use App\Models\Student;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class SecondSheetImport implements ToCollection
+class SecondSheetImport implements ToCollection, WithHeadingRow
 {
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
-            Student::create([
-                'nim' => Arr::get($row, 1),
-                'name' => Arr::get($row, 2),
-                'data_class_id' => Arr::get($row, 3),
-                'major_id' => Arr::get($row, 4),
-                'status' => Arr::get($row, 5)
-            ]);
+            if (!Student::where('nim', Arr::get($row, 'nis'))->first()) {
+                Student::create([
+                    'nim' => Arr::get($row, 'nis'),
+                    'name' => Arr::get($row, 'nama'),
+                    'data_class_id' => 2,
+                    'major_id' => Arr::get($row, 'jurusan'),
+                    'status' => Arr::get($row, 'status')
+                ]);
+            }
         }
     }
 }

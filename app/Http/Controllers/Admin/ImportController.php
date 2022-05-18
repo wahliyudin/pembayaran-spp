@@ -12,12 +12,16 @@ class ImportController extends Controller
 {
     public function siswaImport(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:xls,xlsx'
-        ]);
-        if ($request->file('file')) {
-            Excel::import(new StudentMultipleImport, $request->file('file'));
+        try {
+            $request->validate([
+                'file' => 'required|mimes:xls,xlsx'
+            ]);
+            if ($request->file('file')) {
+                Excel::import(new StudentMultipleImport, $request->file('file'));
+            }
+            return back()->with('success', 'Data berhasil diimport');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
         }
-        return back();
     }
 }

@@ -32,7 +32,7 @@ class TarifPembayaranSiswaComponent extends Component
             $decrypted = Crypt::decrypt($id);
             $this->tarif_payment_id = $decrypted;
         } catch (DecryptException $e) {
-            $this->alert('error', $e->getMessage());
+            abort(404);
         }
         $this->type_of_payment = TypeOfPayment::findOrFail($decrypted);
         foreach (Month::get() as $month) {

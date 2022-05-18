@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/metismenu/metismenu.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/custom.css') }}">
 
     @stack('css')
 </head>

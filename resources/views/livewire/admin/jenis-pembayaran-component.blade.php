@@ -1,4 +1,5 @@
 <div class="px-4 py-8 w-full">
+    @include('layouts.inc.loading')
     <div class="bg-white shadow px-4 py-4 w-full border-t-2 border-gray-700 rounded">
         <div class="flex flex-col">
             <div class="flex justify-between items-center">
@@ -56,9 +57,9 @@
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center space-x-1">
-                                                <button class="bg-green-600 text-white px-2 py-2 rounded flex"
-                                                    wire:click="edit('{{ $item->id }}')">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                <button class="bg-red-600 text-white px-2 py-2 rounded flex"
+                                                    wire:click="delete('{{ $item->id }}')">
+                                                    <i class='bx bx-trash text-xl'></i>
                                                 </button>
                                             </div>
                                         </td>

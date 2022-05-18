@@ -1,10 +1,11 @@
 <div class="px-4 py-8 w-full">
+    @include('layouts.inc.loading')
     <div class="bg-white shadow px-4 py-4 w-full border-t-2 border-gray-700 rounded flex flex-col items-center">
         @if (session()->has('error'))
             <span class="text-red-500 text-sm">{{ session('error') }}</span>
         @endif
         <div class="p-6 shadow-md rounded flex flex-col space-y-4 items-center">
-            <div class="bg-red-500 rounded flex items-center flex-col p-2">
+            <div class="bg-red-500 rounded flex items-center flex-col p-2 animate-bounce">
                 <span class="font-semibold text-white">PERINGATAN!</span>
                 <p class="font-semibold text-white">Halaman ini digunakan untuk membackup seluruh database</p>
             </div>

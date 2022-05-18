@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SchoolYearSeeder::class);
         $this->call(SchoolProfileSeeder::class);
         $this->call(MonthSeeder::class);
+        $this->call(MajorSeeder::class);
+        $this->call(DataClassSeeder::class);
         // DataClass::factory(5)->create();
         // Major::factory(10)->create();
         // Student::factory(100)->create();

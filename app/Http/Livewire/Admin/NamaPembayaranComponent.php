@@ -19,7 +19,6 @@ class NamaPembayaranComponent extends Component
     public $name;
     public $description;
 
-    protected $listeners = ['destroy'];
 
     public function render()
     {
@@ -84,32 +83,6 @@ class NamaPembayaranComponent extends Component
             Payment::create($validatedData);
             $this->closeModal();
             $this->alert('success', 'Data berhasil disimpan');
-        } catch (\Throwable $th) {
-            $this->alert('error', $th->getMessage());
-        }
-    }
-
-
-    public function delete(Payment $payment)
-    {
-        $this->payment = $payment;
-        $this->confirm('Apakah anda yakin?', [
-            'text' => 'Data yang dihapus tidak akan di kembalikan lagi',
-            'showConfirmButton' => true,
-            'confirmButtonText' => 'Ya',
-            'showCanceledButton' => true,
-            'cancelButtonText' => 'Batal',
-            'onConfirmed' => 'destroy',
-            'onDismissed' => 'batal'
-        ]);
-    }
-
-    public function destroy()
-    {
-        try {
-            $this->payment->delete();
-            $this->reset();
-            $this->alert('success', 'Data berhasil dihapus');
         } catch (\Throwable $th) {
             $this->alert('error', $th->getMessage());
         }

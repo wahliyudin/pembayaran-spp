@@ -38,6 +38,7 @@ class ExportController extends Controller
             )->where('monthlies.student_id', $decrypted)->select(
                 'type_of_payments.type_payment as type_of_payment_name',
                 'months.name as month_name',
+                'monthly_payments.id',
                 'monthly_payments.month_bill',
                 'monthly_payments.payment_number',
                 'monthly_payments.status',
@@ -88,5 +89,10 @@ class ExportController extends Controller
         $pdf = PDF::loadView('exports.bukti-transaksi-pembayaran-bebas', compact('frees', 'student', 'informasi'));
 
         return $pdf->setPaper('a4')->stream();
+    }
+
+    public function cetakFormatExcel()
+    {
+        return response()->download(public_path('storage/format/format.xlsx'));
     }
 }

@@ -60,32 +60,6 @@ class JenisPembayaranComponent extends Component
         $this->showModal();
     }
 
-    public function edit(TypeOfPayment $typeOfPayment)
-    {
-        $this->typeOfPayment = $typeOfPayment;
-        $this->payment_id = $typeOfPayment->payment_id;
-        $this->type_payment = $typeOfPayment->type_payment;
-        $this->type = $typeOfPayment->type;
-        $this->school_year_id = $typeOfPayment->school_year_id;
-        $this->showModal();
-    }
-
-    public function update()
-    {
-        try {
-            $this->typeOfPayment->update([
-                'payment_id' => $this->payment_id,
-                'type_payment' => $this->type_payment,
-                'type' => $this->type,
-                'school_year_id' => $this->school_year_id
-            ]);
-            $this->closeModal();
-            $this->alert('success', 'Data berhasil diubah');
-        } catch (\Throwable $th) {
-            $this->alert('error', $th->getMessage());
-        }
-    }
-
     public function store()
     {
         $validatedData = $this->validate([

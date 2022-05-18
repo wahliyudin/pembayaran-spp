@@ -1,4 +1,5 @@
 <div class="px-4 py-8 w-full space-y-4">
+    @include('layouts.inc.loading')
     <div class="bg-white shadow px-4 py-4 w-full border-t-2 border-gray-700 rounded">
         <div class="flex flex-col">
             <span class="pb-4 font-semibold">Tarif - {{ $type_of_payment->type_payment }}</span>

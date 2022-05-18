@@ -1,5 +1,7 @@
-<div class="px-4 py-8 w-full space-y-4">
+<div class="px-4 py-8 w-full space-y-4 relative">
+    @include('layouts.inc.loading')
     <div class="bg-white shadow px-4 py-4 w-full border-t-2 border-gray-700 rounded">
+
         <div class="flex flex-col">
             <span class="pb-4 font-semibold">Tarif - {{ $type_of_payment->type_payment }}</span>
 
@@ -40,10 +42,12 @@
                 <a href="{{ route('jenis-pembayaran') }}"
                     class="text-white pl-3 pr-4 py-1 rounded bg-red-700 flex items-center text-sm"><i
                         class='bx bx-arrow-back mr-2 text-xl'></i> Kembali</a>
-                <button class="text-white pl-3 pr-4 py-1 rounded bg-blue-700 flex items-center text-sm"><i
-                        class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Kelas</button>
-                <button class="text-white pl-3 pr-4 py-1 rounded bg-yellow-700 flex items-center text-sm"><i
-                        class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Jurusan</button>
+                <a href="{{ route('tarif-pembayaran-kelas', Crypt::encrypt($type_of_payment->id)) }}"
+                    class="text-white pl-3 pr-4 py-1 rounded bg-blue-700 flex items-center text-sm"><i
+                        class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Kelas</a>
+                <a href="{{ route('tarif-pembayaran-jurusan', Crypt::encrypt($type_of_payment->id)) }}"
+                    class="text-white pl-3 pr-4 py-1 rounded bg-yellow-700 flex items-center text-sm"><i
+                        class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Jurusan</a>
                 <a href="{{ route('tarif-pembayaran-siswa', Crypt::encrypt($type_of_payment->id)) }}"
                     class="text-white pl-3 pr-4 py-1 rounded bg-purple-700 flex items-center text-sm"><i
                         class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Siswa</a>
@@ -52,6 +56,21 @@
     </div>
     <div class="bg-white shadow px-4 py-4 w-full border-t-2 border-gray-700 rounded">
         <div class="flex flex-col">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm">Perpage :</span>
+                    <select wire:model='per_page' class="text-sm rounded px-2 py-1 w-32">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="flex items-center space-x-2 w-1/3">
+                    <span class="text-sm">Search :</span>
+                    <input wire:model="search" type="search" class="text-sm rounded px-2 py-1 flex-grow">
+                </div>
+            </div>
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden">

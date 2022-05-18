@@ -49,7 +49,7 @@ class TarifTagihanComponent extends Component
         try {
             $decrypted = Crypt::decrypt($id);
         } catch (DecryptException $e) {
-            $this->alert('error', $e->getMessage());
+            abort(404);
         }
         $this->type_of_payment = TypeOfPayment::findOrFail($decrypted);
         $this->type_of_payment_id = $this->type_of_payment->id;

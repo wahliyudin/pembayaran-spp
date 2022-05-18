@@ -1,4 +1,5 @@
 <div class="px-4 py-8 w-full">
+    @include('layouts.inc.loading')
     <div class="bg-white shadow px-4 py-4 w-full border-t-2 border-gray-700 rounded">
         <div class="flex justify-between gap-x-6 w-full">
             <div class="flex flex-col space-y-4 w-1/3">
@@ -14,8 +15,9 @@
                 </div>
                 <div class="flex flex-col space-y-1">
                     <label for="" class="font-semibold text-sm">Alamat Sekolah</label>
-                    <input type="text" wire:model='address' class="border-gray-400 text-sm rounded-sm"
-                        placeholder="Alamat sekolah">
+                    {{-- <input type="text" wire:model='address' class="border-gray-400 text-sm rounded-sm"
+                        placeholder="Alamat sekolah"> --}}
+                    <textarea wire:model='address' class="border-gray-400 text-sm rounded-sm" placeholder="Alamat sekolah"></textarea>
                 </div>
             </div>
             <div class="flex flex-col space-y-4 w-1/3">

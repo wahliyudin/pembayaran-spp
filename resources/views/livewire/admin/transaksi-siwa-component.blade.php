@@ -1,9 +1,9 @@
 <div class="px-4 py-8 w-full flex flex-col space-y-6">
+    @include('layouts.inc.loading')
     <div class="bg-white shadow px-4 py-4 w-full border-t-2 border-gray-700 rounded">
         <div class="flex flex-col">
             <div class="flex items-center justify-between">
-                <span class="font-semibold">Filter Transaksi Pembayaran
-                    {{ $filter['school_year_id'] . ',' . $filter['student_nim'] }}</span>
+                <span class="font-semibold">Filter Transaksi Pembayaran</span>
 
                 <a href="{{ route('peserta-didik') }}"
                     class="text-white bg-green-700 rounded pl-3 pr-4 py-2 flex items-center text-xs"><i
@@ -43,8 +43,8 @@
                 <div class="flex items-center justify-between">
                     <span class="font-semibold">Informasi Siswa</span>
 
-                    <button class="text-white bg-yellow-700 rounded pl-3 pr-4 py-2 flex items-center text-xs"><i
-                            class='bx bxs-printer text-sm mr-2'></i> Cetak Semua Tagihan</button>
+                    {{-- <button class="text-white bg-yellow-700 rounded pl-3 pr-4 py-2 flex items-center text-xs"><i
+                            class='bx bxs-printer text-sm mr-2'></i> Cetak Semua Tagihan</button> --}}
                 </div>
 
                 <div class="flex space-x-6 mt-6">
@@ -67,7 +67,7 @@
                                             </tr>
                                             <tr class="bg-gray-100 border-b">
                                                 <td class="text-sm text-gray-900 px-6 py-2 whitespace-nowrap">
-                                                    NIM
+                                                    NIS
                                                 </td>
                                                 <td>
                                                     :
@@ -87,7 +87,7 @@
                                                     {{ $student->name }}
                                                 </td>
                                             </tr>
-                                            <tr class="bg-gray-100 border-b">
+                                            {{-- <tr class="bg-gray-100 border-b">
                                                 <td class="text-sm text-gray-900 px-6 py-2 whitespace-nowrap">
                                                     Nama Ibu Kandung
                                                 </td>
@@ -97,7 +97,7 @@
                                                 <td class="text-sm text-gray-900 px-6 py-2 whitespace-nowrap">
                                                     -
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                             <tr class="bg-white border-b">
                                                 <td class="text-sm text-gray-900 px-6 py-2 whitespace-nowrap">
                                                     Kelas

@@ -1,4 +1,4 @@
-<div class="px-4 py-8 w-full space-y-4">
+<div class="px-4 py-8 w-full space-y-4 relative">
     @include('layouts.inc.loading')
     <div class="flex gap-x-6 items-start w-full">
         <div class="flex flex-col gap-6 w-2/3">
@@ -40,16 +40,14 @@
                             @enderror
                         </div>
                     </div>
-                    @if (isset($students))
+                    @if (isset($majors))
                         <div class="flex justify-between items-center">
-                            <label for="" class="text-sm font-semibold">Siswa</label>
+                            <label for="" class="text-sm font-semibold">Program Jurusan</label>
 
-                            <select class="text-sm w-2/3" wire:model="student_id">
-                                <option value="">-- Pilih Siswa --</option>
-                                @foreach ($students as $student)
-                                    <option value="{{ $student->id }}">{{ $student->name }} -
-                                        ({{ $student->nim }})
-                                    </option>
+                            <select class="text-sm w-2/3" wire:model="major_id">
+                                <option value="">-- Pilih Program Jurusan --</option>
+                                @foreach ($majors as $major)
+                                    <option value="{{ $major->id }}">{{ $major->name }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -25,4 +25,9 @@ class TypeOfPayment extends Model
     {
         return $this->belongsTo(SchoolYear::class);
     }
+
+    public function monthlies()
+    {
+        return $this->hasMany(Monthly::class);
+    }
 }

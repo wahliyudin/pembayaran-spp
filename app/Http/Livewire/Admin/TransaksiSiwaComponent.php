@@ -88,7 +88,7 @@ class TransaksiSiwaComponent extends Component
         if (!empty($nim) && !empty($school_year_id)) {
             $this->student = Student::with(['dataClass', 'major', 'frees', 'frees.freePayments', 'monthly', 'monthly.monthlyPayments'])->where('nim', $nim)->first();
             if (isset($this->student)) {
-                $this->rest_of_the_bill = $this->student->monthly->monthlyPayments->where('status', MonthlyPayment::STATUS_FALSE)->sum('month_bill');
+                $this->rest_of_the_bill = $this->student->monthly?->monthlyPayments->where('status', MonthlyPayment::STATUS_FALSE)->sum('month_bill');
             }
         }
     }

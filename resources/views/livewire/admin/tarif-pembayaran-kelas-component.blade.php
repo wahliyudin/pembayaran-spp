@@ -40,20 +40,6 @@
                             @enderror
                         </div>
                     </div>
-                    @if (isset($students))
-                        <div class="flex justify-between items-center">
-                            <label for="" class="text-sm font-semibold">Siswa</label>
-
-                            <select class="text-sm w-2/3" wire:model="student_id">
-                                <option value="">-- Pilih Siswa --</option>
-                                @foreach ($students as $student)
-                                    <option value="{{ $student->id }}">{{ $student->name }} -
-                                        ({{ $student->nim }})
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @endif
                 </div>
             </div>
             <div class="bg-white shadow w-full border-t-2 border-gray-700 rounded">
