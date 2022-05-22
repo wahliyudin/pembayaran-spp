@@ -110,9 +110,9 @@
                                                     wire:click="delete('{{ $item->id }}')">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </button>
-                                                <button class="bg-blue-600 text-white px-2 py-2 rounded flex">
+                                                {{-- <button class="bg-blue-600 text-white px-2 py-2 rounded flex">
                                                     <i class="fa-solid fa-eye"></i>
-                                                </button>
+                                                </button> --}}
                                                 <button class="bg-yellow-600 text-white px-2 py-2 rounded flex"
                                                     wire:click="edit('{{ $item->id }}')">
                                                     <i class="fa-solid fa-pen-to-square"></i>

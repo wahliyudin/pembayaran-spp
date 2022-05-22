@@ -8,7 +8,7 @@
 
                 <div class="flex flex-col space-y-1 p-2">
                     <span class="text-xl font-extrabold text-blue-600">Penerimaan Hari Ini</span>
-                    <span class="text-xl font-semibold">Rp. 100.000</span>
+                    <span class="text-xl font-semibold">Rp. {{ numberFormat($payment_now) }}</span>
                 </div>
             </div>
             {{-- <div class="flex bg-white shadow col-span-1">
@@ -28,7 +28,7 @@
 
                 <div class="flex flex-col space-y-1 p-2">
                     <span class="text-xl font-extrabold text-green-600">Total Penerimaan</span>
-                    <span class="text-xl font-semibold">Rp. 100.000</span>
+                    <span class="text-xl font-semibold">Rp. {{ numberFormat($total_payment) }}</span>
                 </div>
             </div>
             <div class="flex bg-white shadow col-span-1">

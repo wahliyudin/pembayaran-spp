@@ -159,7 +159,7 @@
                     {{ $loop->iteration }}
                 </td>
                 <td style="border-bottom: 1px solid; border-right: 1px solid; padding: 0 10px;">
-                    {{ $monthly->payment_date ?? '-' }}
+                    {{ $monthly->payment_date ? \Carbon\Carbon::make($monthly->payment_date)->translatedFormat('d M Y') : '-' }}
                 </td>
                 <td style="border-bottom: 1px solid; border-right: 1px solid; padding: 0 10px;">
                     {{ $monthly->type_of_payment_name }}

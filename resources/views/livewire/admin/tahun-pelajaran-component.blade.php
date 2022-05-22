@@ -7,7 +7,7 @@
                     <i class="fa-solid fa-plus"></i>
                     Tambah Data
                 </button>
-                <div class="relative">
+                {{-- <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
                     <input datepicker datepicker-format="yyyy" datepicker-autohide type="text"
                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Select date">
-                </div>
+                </div> --}}
             </div>
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -62,9 +62,9 @@
                                                     wire:click="delete('{{ $item->id }}')">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </button>
-                                                <button class="bg-green-600 text-white px-2 py-2 rounded flex">
+                                                {{-- <button class="bg-green-600 text-white px-2 py-2 rounded flex">
                                                     <i class="fa-solid fa-check"></i>
-                                                </button>
+                                                </button> --}}
                                             </div>
                                         </td>
                                     </tr>

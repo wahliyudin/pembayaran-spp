@@ -145,7 +145,7 @@
                     {{ $loop->iteration }}
                 </td>
                 <td style="border-bottom: 1px solid;">
-                    {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $free->created_at, 'Asia/Jakarta')->subDays(1)->format('d M Y') }}
+                    {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $free->created_at, 'Asia/Jakarta')->subDays(1)->translatedFormat('d M Y') }}
                 </td>
                 <td style="border-bottom: 1px solid;">{{ $free->payment_number }}</td>
                 <td style="border-bottom: 1px solid;">{{ $free->type_payment }}</td>

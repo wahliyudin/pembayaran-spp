@@ -158,19 +158,11 @@ class PesertaDidikComponent extends Component
                 Excel::import(new StudentMultipleImport, $this->file);
             }
             $this->reset('file');
-            $this->resetFile();
+            resetFileTemp();
             return back()->with('success', 'Data berhasil diimport');
         } catch (\Throwable $th) {
-            $this->resetFile();
+            resetFileTemp();
             return back()->with('error', $th->getMessage());
-        }
-    }
-
-    public function resetFile()
-    {
-        if (count(Storage::files('livewire-tmp')) >= 1) {
-            Storage::deleteDirectory('livewire-tmp');
-            Storage::makeDirectory('livewire-tmp');
         }
     }
 }

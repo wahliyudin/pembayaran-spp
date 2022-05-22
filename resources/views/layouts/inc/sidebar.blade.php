@@ -15,6 +15,13 @@
                 <span class="side-item-text text-sm">Transaksi Siswa</span>
             </a>
         </li>
+        <li class="relative group side-item {{ request()->routeIs('peserta-didik') ? 'mm-active' : '' }}">
+            <a href="{{ route('peserta-didik') }}"
+                class="text-white group-hover:bg-gray-800 {{ request()->routeIs('peserta-didik') ? 'bg-gray-800' : '' }} px-4 flex items-center space-x-4 py-2 side-item-link">
+                <i class='bx bxs-user-badge side-icon text-xl'></i>
+                <span class="side-item-text text-sm">Peserta Didik</span>
+            </a>
+        </li>
         <li
             class="relative group side-item {{ request()->routeIs('nama-pembayaran') || request()->routeIs('jenis-pembayaran') ? 'mm-active' : '' }}">
             <a href="#"
@@ -41,10 +48,10 @@
             </ul>
         </li>
         <li
-            class="relative group side-item {{ request()->routeIs('profile-sekolah') || request()->routeIs('bulan') || request()->routeIs('tahun-pelajaran') || request()->routeIs('kelas') || request()->routeIs('jurusan') || request()->routeIs('peserta-didik') ? 'mm-active' : '' }}">
+            class="relative group side-item {{ request()->routeIs('profile-sekolah') || request()->routeIs('bulan') || request()->routeIs('tahun-pelajaran') || request()->routeIs('kelas') || request()->routeIs('jurusan') ? 'mm-active' : '' }}">
             <a href="#"
-                aria-expanded="{{ request()->routeIs('profile-sekolah') || request()->routeIs('bulan') || request()->routeIs('tahun-pelajaran') || request()->routeIs('kelas') || request()->routeIs('jurusan') || request()->routeIs('peserta-didik') }}"
-                class="has-arrow group-hover:bg-gray-800 {{ request()->routeIs('profile-sekolah') || request()->routeIs('bulan') || request()->routeIs('tahun-pelajaran') || request()->routeIs('kelas') || request()->routeIs('jurusan') || request()->routeIs('peserta-didik') ? 'bg-gray-800' : '' }} text-white px-4 flex items-center space-x-4 py-2 side-item-link">
+                aria-expanded="{{ request()->routeIs('profile-sekolah') || request()->routeIs('bulan') || request()->routeIs('tahun-pelajaran') || request()->routeIs('kelas') || request()->routeIs('jurusan') }}"
+                class="has-arrow group-hover:bg-gray-800 {{ request()->routeIs('profile-sekolah') || request()->routeIs('bulan') || request()->routeIs('tahun-pelajaran') || request()->routeIs('kelas') || request()->routeIs('jurusan') ? 'bg-gray-800' : '' }} text-white px-4 flex items-center space-x-4 py-2 side-item-link">
                 <i class="fa-solid fa-wrench side-icon"></i>
                 <span class="side-item-text text-sm">Pengaturan Umum</span>
             </a>
@@ -84,13 +91,6 @@
                         <span class="text-sm">Jurusan</span>
                     </a>
                 </li>
-                <li class="hover:bg-gray-800 {{ request()->routeIs('peserta-didik') ? 'bg-gray-800' : '' }}">
-                    <a href="{{ route('peserta-didik') }}"
-                        class="text-white pl-8 flex items-center space-x-4 py-2 side-child-item">
-                        <i class='bx bxs-right-arrow-alt text-xl'></i>
-                        <span class="text-sm">Peserta Didik</span>
-                    </a>
-                </li>
             </ul>
         </li>
         {{-- <li class="relative group side-item">
@@ -121,6 +121,7 @@
                 <span class="side-item-text text-sm">Pengguna Aplikasi</span>
             </a>
         </li> --}}
+
         <li class="relative group side-item {{ request()->routeIs('backup.database') ? 'mm-active' : '' }}">
             <a href="{{ route('backup.database') }}"
                 class="text-white group-hover:bg-gray-800 {{ request()->routeIs('backup.database') ? 'bg-gray-800' : '' }} px-4 flex items-center space-x-4 py-2 side-item-link">
