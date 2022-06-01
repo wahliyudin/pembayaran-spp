@@ -15,7 +15,7 @@ class PaymentSeeder extends Seeder
     public function run()
     {
         $payments = [
-            ['name' => 'INFAQ', 'description' => 'Sumbangan Infaq Bulanan']
+            ['name' => 'INFAQ', 'description' => 'Sumbangan Infaq']
         ];
 
         for ($i = 0; $i < count($payments); $i++) {

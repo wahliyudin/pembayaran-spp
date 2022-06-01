@@ -27,7 +27,7 @@
                     @enderror
                 </div>
                 <div class="flex flex-col space-y-2">
-                    <label for="">Input Berdasarkan NIM Siswa</label>
+                    <label for="">Input Berdasarkan NIS Siswa</label>
                     <input type="number" wire:model='filter.student_nim' class="rounded text-sm"
                         placeholder="121332...">
                     @error('filter.student_nim')

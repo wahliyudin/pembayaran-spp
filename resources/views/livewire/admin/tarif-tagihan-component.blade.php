@@ -41,10 +41,10 @@
                 <a href="{{ route('jenis-pembayaran') }}"
                     class="text-white pl-3 pr-4 py-1 rounded bg-red-700 flex items-center text-sm"><i
                         class='bx bx-arrow-back mr-2 text-xl'></i> Kembali</a>
-                <button class="text-white pl-3 pr-4 py-1 rounded bg-blue-700 flex items-center text-sm"><i
+                {{-- <button class="text-white pl-3 pr-4 py-1 rounded bg-blue-700 flex items-center text-sm"><i
                         class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Kelas</button>
                 <button class="text-white pl-3 pr-4 py-1 rounded bg-yellow-700 flex items-center text-sm"><i
-                        class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Jurusan</button>
+                        class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Jurusan</button> --}}
                 <button class="text-white pl-3 pr-4 py-1 rounded bg-purple-700 flex items-center text-sm"
                     wire:click="create"><i class='bx bx-plus mr-2 text-xl'></i> Berdasarkan Siswa</button>
             </div>

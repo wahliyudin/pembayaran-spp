@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SchoolProfile;
 use App\Models\Student;
-use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
-use PDF;
 
 class ExportController extends Controller
 {
@@ -19,7 +18,7 @@ class ExportController extends Controller
         try {
             $decrypted = Crypt::decrypt($id);
             $informasi = SchoolProfile::first();
-            $student = Student::findOrFail($decrypted)->with(['dataClass', 'major', 'monthly'])->first();
+            $student = Student::with(['dataClass', 'major', 'monthly'])->findOrFail($decrypted);
             $monthlies = DB::table('monthlies')->join(
                 'type_of_payments',
                 'type_of_payments.id',
@@ -44,8 +43,9 @@ class ExportController extends Controller
                 'monthly_payments.status',
                 'monthly_payments.payment_date'
             )->get();
-            $pdf = PDF::loadView('exports.bukti-transaksi-pembayaran-bulanan', compact('monthlies', 'student', 'informasi'));
-            return $pdf->setPaper('a4')->stream();
+            $pdf = PDF::loadView('exports.bukti-transaksi-pembayaran-bulanan', compact('monthlies', 'student',
+            'informasi'));
+            return $pdf->setPaper('A4')->stream();
         } catch (DecryptException $th) {
             throw $th;
         }
@@ -56,8 +56,7 @@ class ExportController extends Controller
         try {
             $decrypted = Crypt::decrypt($id);
             $informasi = SchoolProfile::first();
-            $student = Student::findOrFail($decrypted)->with(['dataClass', 'major'])->first();
-            // dd($student);
+            $student = Student::with(['dataClass', 'major'])->findOrFail($decrypted);
             $frees = DB::table('frees')->join(
                 'type_of_payments',
                 'type_of_payments.id',
@@ -82,10 +81,8 @@ class ExportController extends Controller
                 'free_payments.description',
                 'free_payments.created_at'
             )->get();
-            // dd($frees);
         } catch (DecryptException $th) {
         }
-        // $student = Student::findOrFail($id)->with('dataClass:name', 'major:name', 'frees', 'monthly')->first();
         $pdf = PDF::loadView('exports.bukti-transaksi-pembayaran-bebas', compact('frees', 'student', 'informasi'));
 
         return $pdf->setPaper('a4')->stream();

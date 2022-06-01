@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
         // DataClass::factory(5)->create();
         // Major::factory(10)->create();
         // Student::factory(100)->create();
-        // $this->call(PaymentSeeder::class);
+        $this->call(PaymentSeeder::class);
     }
 }

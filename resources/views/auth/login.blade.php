@@ -33,7 +33,7 @@
                             </a>
                         @endif
                         <button type="submit"
-                            class="text-white px-4 py-2 bg-gray-700 rounded flex items-center uppercase text-sm font-semibold"><i
+                            class="text-white px-4 py-2 bg-gray-700 rounded flex items-center uppercase text-sm font-semibold active:bg-gray-800 hover:bg-gray-800"><i
                                 class='bx bx-shuffle mr-2 text-xl'></i> Login</button>
                     </div>
                 </div>

@@ -20,6 +20,9 @@ use App\Http\Livewire\Admin\TarifPembayaranKelasComponent;
 use App\Http\Livewire\Admin\TarifPembayaranSiswaComponent;
 use App\Http\Livewire\Admin\TarifTagihanComponent;
 use App\Http\Livewire\Admin\TransaksiSiwaComponent;
+use App\Models\Free;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
 

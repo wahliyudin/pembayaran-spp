@@ -58,9 +58,17 @@ class TarifTagihanComponent extends Component
 
     public function render()
     {
+
         return view('livewire.admin.tarif-tagihan-component', [
             'data_classes' => DataClass::get(),
             'majors' => Major::get(),
+            // 'frees' => Free::with(['student' => function ($query) {
+            //     $query->when(Arr::get($this->filter, 'data_class_id'), function ($query) {
+            //         $query->where('data_class_id', Arr::get($this->filter, 'data_class_id'));
+            //     })->when(Arr::get($this->filter, 'major_id'), function ($query) {
+            //         $query->where('major_id', Arr::get($this->filter, 'major_id'));
+            //     });
+            // }, 'student.dataClass:id,name', 'student.major:id,name'])->paginate(5)
             'frees' => DB::table('frees')->join('students', 'students.id', '=', 'frees.student_id')->join('data_classes', 'data_classes.id', '=', 'students.data_class_id')->join('majors', 'majors.id', '=', 'students.major_id')->when(Arr::get($this->filter, 'data_class_id'), function (Builder $query) {
                 $query->where('data_classes.id', Arr::get($this->filter, 'data_class_id'))->first();
             })->when(Arr::get($this->filter, 'major_id'), function (Builder $query) {

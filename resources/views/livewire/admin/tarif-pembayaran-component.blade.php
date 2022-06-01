@@ -116,10 +116,10 @@
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center space-x-1">
-                                                <button class="bg-yellow-600 text-white px-2 py-2 rounded flex"
+                                                {{-- <button class="bg-yellow-600 text-white px-2 py-2 rounded flex"
                                                     wire:click="edit('{{ $item->id }}')">
                                                     <i class="fa-solid fa-pen-to-square"></i>
-                                                </button>
+                                                </button> --}}
                                                 <button class="bg-red-600 text-white px-2 py-2 rounded flex"
                                                     wire:click="delete('{{ $item->id }}')">
                                                     <i class="fa-solid fa-trash-can"></i>

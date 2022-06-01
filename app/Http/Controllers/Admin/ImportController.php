@@ -21,7 +21,7 @@ class ImportController extends Controller
             }
             return back()->with('success', 'Data berhasil diimport');
         } catch (\Throwable $th) {
-            return back()->with('error', $th->getMessage());
+            return back()->with('error', 'Format yang dimasukan belum sesuai');
         }
     }
 }
